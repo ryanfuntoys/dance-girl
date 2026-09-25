@@ -1,284 +1,167 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>NON-STOP DANCE GIRL</title>
-  <meta name="theme-color" content="#163a7a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💃</text></svg>" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --sky:#163a7a; --ink:#061225; --gold:#ffe38a;
-      --pad-t:max(10px, env(safe-area-inset-top));
-      --pad-b:max(12px, env(safe-area-inset-bottom));
-      --pad-x:max(12px, env(safe-area-inset-left), env(safe-area-inset-right));
-    }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    html, body {
-      height:100%; height:100dvh; background:#0b1c40; color:#fff;
-      font-family:"Press Start 2P", ui-monospace, Menlo, monospace;
-      overflow:hidden; user-select:none; -webkit-user-select:none;
-      -webkit-tap-highlight-color:transparent;
-    }
-    body {
-      display:grid; grid-template-rows:auto 1fr auto;
-      background:
-        radial-gradient(900px 420px at 50% -10%, #2b5fb3 0%, transparent 62%),
-        linear-gradient(180deg, #1a4a96 0%, var(--sky) 46%, #0b1c40 100%);
-    }
-    .top { z-index:8; display:flex; justify-content:space-between; gap:10px; padding:var(--pad-t) var(--pad-x) 8px; pointer-events:none; }
-    h1 { font-size:clamp(9px,2.6vw,15px); letter-spacing:1.4px; line-height:1.45; text-shadow:2px 2px 0 var(--ink); }
-    .sub { margin-top:6px; font-size:7px; letter-spacing:1.2px; opacity:.72; }
-    .clock { text-align:right; }
-    .clock .num { font-size:clamp(16px,5.4vw,26px); color:var(--gold); line-height:1; text-shadow:2px 2px 0 var(--ink); }
-    .clock .unit,.clock .best { margin-top:6px; font-size:6px; letter-spacing:.8px; opacity:.78; }
-    .clock .best { color:#ffd1e8; }
-    .stage { position:relative; min-height:0; overflow:hidden; }
-    #space { position:absolute; inset:0; width:100%; height:100%; display:block; }
-    .flyer { position:absolute; left:58%; top:52%; width:min(280px,64vw); height:min(280px,44dvh); transform:translate(-50%,-50%); z-index:4; pointer-events:none; }
-    .flyer img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; border:0; filter:drop-shadow(0 12px 0 rgba(0,0,0,.18)); }
-    .flyer img.on { opacity:1; }
-    .hud { z-index:8; display:flex; flex-direction:column; align-items:center; gap:8px; padding:8px var(--pad-x) var(--pad-b); }
-    .controls { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
-    button { font-family:inherit; font-size:7px; letter-spacing:.6px; color:#10203a; background:#f3f6ff; border:3px solid var(--ink); padding:9px 10px; box-shadow:3px 3px 0 var(--ink); }
-    button:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
-    button.on { background:#b8ffd2; }
-    button.hot { background:#ffd1e8; }
-    .achieve { min-height:16px; font-size:7px; color:#ffd1e8; text-align:center; }
-    .tap-gate { position:fixed; inset:0; z-index:30; background:rgba(6,14,32,.72); display:grid; place-items:center; padding:24px; cursor:pointer; }
-    .tap-gate.gone { display:none; }
-    .tap-card { background:#163a7a; border:5px solid var(--ink); padding:26px 20px 22px; width:min(360px,88vw); text-align:center; box-shadow:8px 8px 0 var(--ink); }
-    .tap-card h2 { font-size:13px; line-height:1.55; margin-bottom:12px; }
-    .tap-card p { font-size:7px; line-height:1.9; opacity:.9; }
-    .tap-card .go { display:inline-block; margin-top:16px; background:var(--gold); color:var(--ink); border:3px solid var(--ink); padding:8px 12px; font-size:7px; box-shadow:3px 3px 0 var(--ink); }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>NON-STOP DANCE GIRL</title>
+<meta name="theme-color" content="#163a7a"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;height:100dvh;overflow:hidden;background:#0b1c40;color:#fff;font-family:"Press Start 2P",monospace;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(1000px 480px at 50% -12%,#2b5fb3 0%,transparent 60%),linear-gradient(180deg,#1a4a96 0%,#163a7a 48%,#0b1c40 100%)}
+#space{position:fixed;inset:0;width:100%;height:100%;z-index:1}
+.top{position:fixed;top:0;left:0;right:0;z-index:8;display:flex;justify-content:space-between;gap:10px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-left)) 8px max(12px,env(safe-area-inset-right));pointer-events:none}
+h1{font-size:clamp(9px,2.6vw,15px);letter-spacing:1.4px;line-height:1.45;text-shadow:2px 2px 0 #061225}
+.sub{margin-top:6px;font-size:7px;letter-spacing:1.2px;opacity:.72}
+.clock{text-align:right}
+.clock .num{font-size:clamp(18px,6vw,28px);color:#ffe38a;line-height:1;text-shadow:2px 2px 0 #061225}
+.clock .unit,.clock .best{margin-top:6px;font-size:6px;opacity:.78}
+.clock .best{color:#ffd1e8}
+.flyer{position:fixed;left:58%;top:50%;z-index:4;pointer-events:none;line-height:0;width:auto;height:auto;background:none;border:0;outline:0;box-shadow:none}
+.flyer img{display:block;width:min(280px,68vw);height:auto;max-width:68vw;max-height:56dvh;border:0;outline:0;background:none;box-shadow:none;filter:drop-shadow(0 16px 0 rgba(0,0,0,.18));-webkit-user-drag:none}
+.hud{position:fixed;left:0;right:0;bottom:0;z-index:8;display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 12px max(12px,env(safe-area-inset-bottom))}
+.controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+button{font-family:inherit;font-size:7px;letter-spacing:.6px;color:#10203a;background:#f3f6ff;border:3px solid #061225;padding:9px 10px;box-shadow:3px 3px 0 #061225}
+button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #061225}
+button.on{background:#b8ffd2}button.hot{background:#ffd1e8}
+.achieve{min-height:16px;font-size:7px;color:#ffd1e8;text-align:center}
+.tap-gate{position:fixed;inset:0;z-index:30;background:rgba(6,14,32,.72);display:grid;place-items:center;padding:24px}
+.tap-gate.gone{display:none}
+.tap-card{background:#163a7a;border:5px solid #061225;padding:26px 20px 22px;width:min(360px,88vw);text-align:center;box-shadow:8px 8px 0 #061225}
+.tap-card h2{font-size:13px;line-height:1.55;margin-bottom:12px}
+.tap-card p{font-size:7px;line-height:1.9;opacity:.9}
+.tap-card .go{display:inline-block;margin-top:16px;background:#ffe38a;color:#061225;border:3px solid #061225;padding:8px 12px;font-size:7px;box-shadow:3px 3px 0 #061225}
+</style>
 </head>
 <body>
-  <div class="tap-gate" id="gate">
-    <div class="tap-card">
-      <h2>NON-STOP<br>DANCE GIRL</h2>
-      <p>Ketuk untuk mulai.<br>Tarian + musik looping tanpa henti.</p>
-      <div class="go">MULAI NARI</div>
-    </div>
+<canvas id="space"></canvas>
+<div class="tap-gate" id="gate">
+  <div class="tap-card">
+    <h2>NON-STOP<br>DANCE GIRL</h2>
+    <p>Ketuk untuk mulai.<br>Tarian + musik looping tanpa henti.</p>
+    <div class="go">MULAI NARI</div>
   </div>
-  <header class="top">
-    <div>
-      <h1>NON-STOP DANCE GIRL</h1>
-      <div class="sub">ALA NYAN.CAT · NARI TERUS</div>
-    </div>
-    <div class="clock">
-      <div class="num" id="seconds">0.0</div>
-      <div class="unit">DETIK</div>
-      <div class="best" id="best">REKOR 0.0</div>
-    </div>
-  </header>
-  <div class="stage" id="stage">
-    <canvas id="space"></canvas>
-    <div class="flyer" id="flyer">
-      <img alt="" data-frame="shrug" />
-      <img alt="" data-frame="dance" />
-      <img alt="" data-frame="yes" />
-    </div>
+</div>
+<header class="top">
+  <div><h1>NON-STOP DANCE GIRL</h1><div class="sub">ALA NYAN.CAT · NARI TERUS</div></div>
+  <div class="clock"><div class="num" id="seconds">0.0</div><div class="unit">DETIK</div><div class="best" id="best">REKOR 0.0</div></div>
+</header>
+<div class="flyer" id="flyer"><img id="girl" alt="" decoding="async"/></div>
+<div class="hud">
+  <div class="controls">
+    <button id="btnMusic" class="on" type="button">MUSIK ON</button>
+    <button id="btnSpeed" type="button">TEMPO</button>
+    <button id="btnTrail" class="hot" type="button">PELANGI</button>
+    <button id="btnFull" type="button">PENUH</button>
   </div>
-  <div class="hud">
-    <div class="controls">
-      <button id="btnMusic" class="on" type="button">MUSIK ON</button>
-      <button id="btnSpeed" type="button">TEMPO</button>
-      <button id="btnTrail" class="hot" type="button">PELANGI</button>
-      <button id="btnFull" type="button">PENUH</button>
-    </div>
-    <div class="achieve" id="achieve">memuat...</div>
-  </div>
-  <script>
-    const frames = [...document.querySelectorAll("#flyer img")];
-    const flyer = document.getElementById("flyer");
-    const stage = document.getElementById("stage");
-    const secondsEl = document.getElementById("seconds");
-    const bestEl = document.getElementById("best");
-    const achieveEl = document.getElementById("achieve");
-    const gate = document.getElementById("gate");
-    const btnMusic = document.getElementById("btnMusic");
-    const btnSpeed = document.getElementById("btnSpeed");
-    const btnTrail = document.getElementById("btnTrail");
-    const btnFull = document.getElementById("btnFull");
-    const canvas = document.getElementById("space");
-    const ctx = canvas.getContext("2d");
-    const sequence = [1, 2, 0, 1, 2, 1];
-    let seqIndex = 0, frameMs = 180, startedAt = 0, accumulated = 0;
-    let running = false, musicOn = true, trailMode = 0, assetsReady = false;
-    const speeds = [{label:"PELAN",ms:320},{label:"NORMAL",ms:180},{label:"CEPAT",ms:110},{label:"GILA",ms:60}];
-    let speedIdx = 1;
-    const BEST_KEY = "dance-girl-best";
-    let best = Number(localStorage.getItem(BEST_KEY) || 0);
-    const milestones = [[5,"5 DETIK. PEMANASAN."],[10,"10 DETIK. KAKI MULAI GATAL."],[30,"30 DETIK. INI SUDAH NARI BENERAN."],[60,"1 MENIT. JANGAN BERHENTI."],[120,"2 MENIT. DIA MASIH SEMANGAT."],[180,"3 MENIT. KAMU JUGA MASIH DI SINI?"],[300,"5 MENIT. PRESTASI YANG ANEH TAPI NYATA."],[600,"10 MENIT. INI SUDAH MEDITASI."],[900,"15 MENIT. RESPECT."],[1800,"30 MENIT. KAMU PEJUANG TAB."],[3600,"1 JAM. NON-STOP SEJATI."]];
-    const unlocked = new Set();
-    function showFrame(i){ frames.forEach((img,idx)=>img.classList.toggle("on", idx===i)); }
-    showFrame(1);
-    function renderBest(v){ bestEl.textContent = "REKOR " + v.toFixed(1); }
-    renderBest(best);
-    function currentSec(){ return running ? accumulated + (Date.now()-startedAt)/1000 : accumulated; }
-    const BASES = [
-      "https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/img/",
-      "https://raw.githubusercontent.com/ryanfuntoys/dance-girl/main/img/"
-    ];
-    async function fetchText(url){
-      const r = await fetch(url, {cache:"no-store"});
-      if (!r.ok) throw new Error(String(r.status));
-      const t = (await r.text()).trim();
-      if (!t || t === "PLACEHOLDER" || t.length < 80 || t[0] === "<") throw new Error("bad");
-      return t;
-    }
-    async function loadB64(name){
-      if (name === "yes") {
-        const parts = [];
-        for (let i = 1; i <= 3; i++) {
-          let got = "";
-          for (const base of BASES) {
-            try { got = await fetchText(base + "yes.b64." + i); break; } catch(e){}
-          }
-          if (!got) throw new Error("yes");
-          parts.push(got);
-        }
-        return parts.join("");
+  <div class="achieve" id="achieve">ketuk untuk mulai menari</div>
+</div>
+<script>
+const girl=document.getElementById("girl");
+const flyer=document.getElementById("flyer");
+const FALLBACKS=[
+  "img/loop.gif",
+  "img/loop-mini.gif",
+  "https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/img/loop.gif",
+  "https://raw.githubusercontent.com/ryanfuntoys/dance-girl/main/img/loop.gif",
+  "https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/img/loop-mini.gif",
+  "https://rawcdn.githack.com/ryanfuntoys/dance-girl/main/img/loop.gif"
+];
+let fb=0;
+function nextSrc(){if(fb<FALLBACKS.length)girl.src=FALLBACKS[fb++]}
+girl.addEventListener("error",nextSrc);
+nextSrc();
+const secondsEl=document.getElementById("seconds");
+const bestEl=document.getElementById("best");
+const achieveEl=document.getElementById("achieve");
+const gate=document.getElementById("gate");
+const btnMusic=document.getElementById("btnMusic");
+const btnSpeed=document.getElementById("btnSpeed");
+const btnTrail=document.getElementById("btnTrail");
+const btnFull=document.getElementById("btnFull");
+const canvas=document.getElementById("space");
+const ctx=canvas.getContext("2d");
+let startedAt=0,accumulated=0,running=false,musicOn=true,trailMode=0,speedIdx=1;
+const speeds=[{label:"PELAN",mult:.55},{label:"NORMAL",mult:1},{label:"CEPAT",mult:1.7},{label:"GILA",mult:2.6}];
+const BEST_KEY="dance-girl-best";
+let best=Number(localStorage.getItem(BEST_KEY)||0);
+const milestones=[[5,"5 DETIK. PEMANASAN."],[10,"10 DETIK. KAKI MULAI GATAL."],[30,"30 DETIK. INI SUDAH NARI BENERAN."],[60,"1 MENIT. JANGAN BERHENTI."],[120,"2 MENIT. DIA MASIH SEMANGAT."],[180,"3 MENIT. KAMU JUGA MASIH DI SINI?"],[300,"5 MENIT. PRESTASI YANG ANEH TAPI NYATA."],[600,"10 MENIT. INI SUDAH MEDITASI."],[900,"15 MENIT. RESPECT."],[1800,"30 MENIT. KAMU PEJUANG TAB."],[3600,"1 JAM. NON-STOP SEJATI."]];
+const unlocked=new Set();
+function renderBest(v){bestEl.textContent="REKOR "+v.toFixed(1)}
+renderBest(best);
+function currentSec(){return running?accumulated+(Date.now()-startedAt)/1000:accumulated}
+let stars=[],trail=[],cssW=1,cssH=1;
+function resize(){
+  cssW=innerWidth;cssH=innerHeight;
+  const dpr=Math.min(2,devicePixelRatio||1);
+  canvas.width=Math.floor(cssW*dpr);canvas.height=Math.floor(cssH*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  stars=Array.from({length:80},()=>({x:Math.random()*cssW,y:Math.random()*cssH,s:Math.random()<.72?2:3,tw:Math.random()*Math.PI*2,sp:.45+Math.random()*1.6,kind:Math.random()<.18?"plus":"dot"}));
+}
+addEventListener("resize",resize);resize();
+const rainbow=["#ff3b3b","#ff9a2f","#ffe44a","#4ade80","#38bdf8","#a78bfa"];
+const pinks=["#fff7fb","#ffd1e8","#ff6fb0","#ff3d8a","#c81e6a","#fff7fb"];
+function draw(){
+  ctx.clearRect(0,0,cssW,cssH);
+  for(const st of stars){
+    st.x-=st.sp;st.tw+=.08;
+    if(st.x<-8){st.x=cssW+8;st.y=Math.random()*cssH}
+    ctx.fillStyle="rgba(255,255,255,"+(0.35+Math.sin(st.tw)*0.45)+")";
+    if(st.kind==="plus"){ctx.fillRect(st.x-3,st.y,7,2);ctx.fillRect(st.x,st.y-3,2,7)}
+    else ctx.fillRect(st.x,st.y,st.s,st.s);
+  }
+  if(trailMode!==2&&trail.length>2){
+    const colors=trailMode===1?pinks:rainbow;
+    const band=Math.max(9,Math.min(14,cssH*0.016));
+    for(let s=0;s<colors.length;s++){
+      ctx.beginPath();ctx.strokeStyle=colors[s];ctx.lineWidth=band;ctx.lineJoin="round";ctx.lineCap="round";
+      const offset=(s-(colors.length-1)/2)*band;
+      for(let i=0;i<trail.length;i++){
+        const p=trail[i],y=p.y+offset+Math.sin(p.t+s*0.35)*2.4;
+        if(i===0)ctx.moveTo(p.x,y);else ctx.lineTo(p.x,y);
       }
-      for (const base of BASES) {
-        try { return await fetchText(base + name + ".b64"); } catch(e){}
-      }
-      throw new Error(name);
+      ctx.stroke();
     }
-    Promise.all(frames.map(async (img) => {
-      const name = img.getAttribute("data-frame");
-      const b64 = await loadB64(name);
-      img.src = "data:image/webp;base64," + b64;
-    })).then(() => {
-      assetsReady = true;
-      achieveEl.textContent = "ketuk untuk mulai menari";
-    }).catch(() => {
-      achieveEl.textContent = "gagal memuat gambar";
-    });
-    let stars=[], trail=[], cssW=1, cssH=1;
-    function resize(){
-      const r = canvas.getBoundingClientRect();
-      cssW=r.width; cssH=r.height;
-      const dpr=Math.min(2, window.devicePixelRatio||1);
-      canvas.width=Math.floor(cssW*dpr); canvas.height=Math.floor(cssH*dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      stars=Array.from({length:64},()=>({x:Math.random()*cssW,y:Math.random()*cssH,s:Math.random()<0.72?2:3,tw:Math.random()*Math.PI*2,sp:0.45+Math.random()*1.5,kind:Math.random()<0.18?"plus":"dot"}));
-    }
-    window.addEventListener("resize", resize); resize();
-    const rainbow=["#ff3b3b","#ff9a2f","#ffe44a","#4ade80","#38bdf8","#a78bfa"];
-    const pinks=["#fff7fb","#ffd1e8","#ff6fb0","#ff3d8a","#c81e6a","#fff7fb"];
-    function draw(){
-      ctx.clearRect(0,0,cssW,cssH);
-      for (const st of stars){
-        st.x-=st.sp; st.tw+=0.08;
-        if (st.x<-8){ st.x=cssW+8; st.y=Math.random()*cssH; }
-        ctx.fillStyle="rgba(255,255,255,"+(0.35+Math.sin(st.tw)*0.45)+")";
-        if (st.kind==="plus"){ ctx.fillRect(st.x-3,st.y,7,2); ctx.fillRect(st.x,st.y-3,2,7); }
-        else ctx.fillRect(st.x,st.y,st.s,st.s);
-      }
-      if (trailMode!==2 && trail.length>2){
-        const colors=trailMode===1?pinks:rainbow;
-        const band=Math.max(8,Math.min(13,cssH*0.018));
-        for (let s=0;s<colors.length;s++){
-          ctx.beginPath(); ctx.strokeStyle=colors[s]; ctx.lineWidth=band; ctx.lineJoin="round";
-          const offset=(s-(colors.length-1)/2)*band;
-          for (let i=0;i<trail.length;i++){
-            const p=trail[i]; const y=p.y+offset+Math.sin(p.t+s*0.35)*2.4;
-            if(i===0) ctx.moveTo(p.x,y); else ctx.lineTo(p.x,y);
-          }
-          ctx.stroke();
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-    function flyerCenter(){
-      const s=stage.getBoundingClientRect(); const f=flyer.getBoundingClientRect();
-      return {x:f.left-s.left+f.width*0.16,y:f.top-s.top+f.height*0.52,t:performance.now()/150};
-    }
-    function tickDance(){ if(!running) return; seqIndex=(seqIndex+1)%sequence.length; showFrame(sequence[seqIndex]); setTimeout(tickDance, frameMs); }
-    function tickMove(){
-      if(!running) return;
-      const t=currentSec(); const bob=Math.sin(t*4.8)*8; const xCycle=(t*18)%100;
-      const x=28+(xCycle<50?xCycle*0.7:(100-xCycle)*0.7);
-      flyer.style.left=x+"%"; flyer.style.top="calc(52% + "+bob+"px)";
-      flyer.style.transform="translate(-50%, -50%) rotate("+ (Math.sin(t*2.6)*2.4)+"deg)";
-      trail.push(flyerCenter()); if(trail.length>48) trail.shift();
-      requestAnimationFrame(tickMove);
-    }
-    function tickScore(){
-      if(!running) return;
-      const sec=currentSec(); secondsEl.textContent=sec.toFixed(1);
-      if(sec>best){ best=sec; localStorage.setItem(BEST_KEY,String(best)); renderBest(best); }
-      for (const [at,msg] of milestones){ if(sec>=at && !unlocked.has(at)){ unlocked.add(at); achieveEl.textContent=msg; } }
-      requestAnimationFrame(tickScore);
-    }
-    let audioCtx, master, playing=false, loopTimer=null;
-    function note(freq,time,dur,type,gain){
-      const o=audioCtx.createOscillator(); const g=audioCtx.createGain();
-      o.type=type; o.frequency.value=freq;
-      g.gain.setValueAtTime(0.0001,time); g.gain.exponentialRampToValueAtTime(gain,time+0.015);
-      g.gain.exponentialRampToValueAtTime(0.0001,time+dur);
-      o.connect(g); g.connect(master); o.start(time); o.stop(time+dur+0.02);
-    }
-    function kick(time){
-      const o=audioCtx.createOscillator(); const g=audioCtx.createGain();
-      o.type="sine"; o.frequency.setValueAtTime(150,time); o.frequency.exponentialRampToValueAtTime(42,time+0.14);
-      g.gain.setValueAtTime(0.36,time); g.gain.exponentialRampToValueAtTime(0.0001,time+0.16);
-      o.connect(g); g.connect(master); o.start(time); o.stop(time+0.18);
-    }
-    function hat(time){
-      const o=audioCtx.createOscillator(); const g=audioCtx.createGain();
-      o.type="square"; o.frequency.value=6800;
-      g.gain.setValueAtTime(0.028,time); g.gain.exponentialRampToValueAtTime(0.0001,time+0.045);
-      o.connect(g); g.connect(master); o.start(time); o.stop(time+0.05);
-    }
-    const lead=[523.25,587.33,659.25,783.99,659.25,587.33,523.25,392.00];
-    const bass=[130.81,130.81,196.00,174.61,146.83,146.83,174.61,196.00];
-    function scheduleLoop(start){
-      const beat=0.21;
-      for(let bar=0;bar<4;bar++) for(let i=0;i<8;i++){
-        const t=start+(bar*8+i)*beat;
-        if(i%2===0) kick(t); hat(t); if(i%2===0) hat(t+beat*0.5);
-        note(lead[(i+bar)%lead.length],t,beat*0.82,"square",0.06);
-        note(bass[i],t,beat*1.02,"triangle",0.07);
-      }
-      return beat*32;
-    }
-    function startMusic(){
-      if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-      if(audioCtx.state==="suspended") audioCtx.resume();
-      if(!master){ master=audioCtx.createGain(); master.gain.value=0.48; master.connect(audioCtx.destination); }
-      playing=true;
-      const pass=()=>{ if(!playing||!musicOn) return; const len=scheduleLoop(audioCtx.currentTime+0.04); loopTimer=setTimeout(pass,len*1000-30); };
-      pass();
-    }
-    function stopMusic(){ playing=false; if(loopTimer) clearTimeout(loopTimer); }
-    function startAll(){
-      if(running||!assetsReady) return;
-      running=true; startedAt=Date.now(); gate.classList.add("gone");
-      achieveEl.textContent="nari terus...";
-      tickDance(); tickMove(); tickScore(); if(musicOn) startMusic();
-    }
-    gate.addEventListener("click", startAll);
-    document.addEventListener("keydown", e => { if(e.code==="Space"||e.code==="Enter"){ e.preventDefault(); startAll(); } });
-    document.addEventListener("visibilitychange", () => {
-      if(document.hidden && running){ accumulated=currentSec(); running=false; stopMusic(); }
-      else if(!document.hidden && accumulated>0 && !running){ running=true; startedAt=Date.now(); tickDance(); tickMove(); tickScore(); if(musicOn) startMusic(); }
-    });
-    btnMusic.addEventListener("click", () => {
-      musicOn=!musicOn; btnMusic.textContent=musicOn?"MUSIK ON":"MUSIK OFF"; btnMusic.classList.toggle("on", musicOn);
-      if(!running) return; if(musicOn) startMusic(); else stopMusic();
-    });
-    btnSpeed.addEventListener("click", () => { speedIdx=(speedIdx+1)%speeds.length; frameMs=speeds[speedIdx].ms; btnSpeed.textContent=speeds[speedIdx].label; });
-    btnTrail.addEventListener("click", () => { trailMode=(trailMode+1)%3; btnTrail.textContent=["PELANGI","PINK","JEJAK OFF"][trailMode]; btnTrail.classList.toggle("hot", trailMode!==2); });
-    btnFull.addEventListener("click", async () => {
-      try { const el=document.documentElement; if(!document.fullscreenElement && el.requestFullscreen) await el.requestFullscreen(); else if(document.exitFullscreen) await document.exitFullscreen(); } catch(_){}
-    });
-  </script>
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+function flyerCenter(){const f=flyer.getBoundingClientRect();return{x:f.left+f.width*0.18,y:f.top+f.height*0.55,t:performance.now()/150}}
+function tickMove(){
+  if(!running)return;
+  const t=currentSec(),mult=speeds[speedIdx].mult;
+  const bob=Math.sin(t*4.8*mult)*10,xCycle=(t*18*mult)%100;
+  const x=30+(xCycle<50?xCycle*0.62:(100-xCycle)*0.62);
+  flyer.style.left=x+"%";flyer.style.top="calc(50% + "+bob+"px)";
+  flyer.style.transform="translate(-50%,-50%) rotate("+ (Math.sin(t*2.6*mult)*2.2)+"deg)";
+  trail.push(flyerCenter());if(trail.length>56)trail.shift();
+  requestAnimationFrame(tickMove);
+}
+function tickScore(){
+  if(!running)return;
+  const sec=currentSec();secondsEl.textContent=sec.toFixed(1);
+  if(sec>best){best=sec;localStorage.setItem(BEST_KEY,String(best));renderBest(best)}
+  for(const [at,msg] of milestones){if(sec>=at&&!unlocked.has(at)){unlocked.add(at);achieveEl.textContent=msg}}
+  requestAnimationFrame(tickScore);
+}
+let audioCtx,master,playing=false,loopTimer=null;
+function note(freq,time,dur,type,gain){const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(0.0001,time);g.gain.exponentialRampToValueAtTime(gain,time+0.015);g.gain.exponentialRampToValueAtTime(0.0001,time+dur);o.connect(g);g.connect(master);o.start(time);o.stop(time+dur+0.02)}
+function kick(time){const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sine";o.frequency.setValueAtTime(150,time);o.frequency.exponentialRampToValueAtTime(42,time+0.14);g.gain.setValueAtTime(0.36,time);g.gain.exponentialRampToValueAtTime(0.0001,time+0.16);o.connect(g);g.connect(master);o.start(time);o.stop(time+0.18)}
+function hat(time){const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="square";o.frequency.value=6800;g.gain.setValueAtTime(0.028,time);g.gain.exponentialRampToValueAtTime(0.0001,time+0.045);o.connect(g);g.connect(master);o.start(time);o.stop(time+0.05)}
+const lead=[523.25,587.33,659.25,783.99,659.25,587.33,523.25,392],bass=[130.81,130.81,196,174.61,146.83,146.83,174.61,196];
+function scheduleLoop(start){const beat=0.21;for(let bar=0;bar<4;bar++)for(let i=0;i<8;i++){const t=start+(bar*8+i)*beat;if(i%2===0)kick(t);hat(t);if(i%2===0)hat(t+beat*0.5);note(lead[(i+bar)%lead.length],t,beat*0.82,"square",0.06);note(bass[i],t,beat*1.02,"triangle",0.07)}return beat*32}
+function startMusic(){if(!audioCtx)audioCtx=new(AudioContext||webkitAudioContext);if(audioCtx.state==="suspended")audioCtx.resume();if(!master){master=audioCtx.createGain();master.gain.value=0.48;master.connect(audioCtx.destination)}playing=true;const pass=()=>{if(!playing||!musicOn)return;const len=scheduleLoop(audioCtx.currentTime+0.04);loopTimer=setTimeout(pass,len*1000-30)};pass()}
+function stopMusic(){playing=false;if(loopTimer)clearTimeout(loopTimer)}
+function startAll(){if(running)return;running=true;startedAt=Date.now();gate.classList.add("gone");achieveEl.textContent="nari terus...";tickMove();tickScore();if(musicOn)startMusic()}
+gate.addEventListener("click",startAll);
+document.addEventListener("keydown",e=>{if(e.code==="Space"||e.code==="Enter"){e.preventDefault();startAll()}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&running){accumulated=currentSec();running=false;stopMusic()}else if(!document.hidden&&accumulated>0&&!running){running=true;startedAt=Date.now();tickMove();tickScore();if(musicOn)startMusic()}});
+btnMusic.addEventListener("click",()=>{musicOn=!musicOn;btnMusic.textContent=musicOn?"MUSIK ON":"MUSIK OFF";btnMusic.classList.toggle("on",musicOn);if(!running)return;if(musicOn)startMusic();else stopMusic()});
+btnSpeed.addEventListener("click",()=>{speedIdx=(speedIdx+1)%speeds.length;btnSpeed.textContent=speeds[speedIdx].label});
+btnTrail.addEventListener("click",()=>{trailMode=(trailMode+1)%3;btnTrail.textContent=["PELANGI","PINK","JEJAK OFF"][trailMode];btnTrail.classList.toggle("hot",trailMode!==2)});
+btnFull.addEventListener("click",async()=>{try{const el=document.documentElement;if(!document.fullscreenElement&&el.requestFullscreen)await el.requestFullscreen();else if(document.exitFullscreen)await document.exitFullscreen()}catch(_){}});
+</script>
 </body>
 </html>
