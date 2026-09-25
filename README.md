@@ -2,6 +2,8 @@
 
 Halaman looping ala [nyan.cat](https://nyan.cat).
 
+Karakter, pelangi, dan bintang full-bleed. Tidak ada kotak kosong — gambar tertanam di `index.html` (tidak fetch file terpisah), jadi htmlpreview pun tetap muncul.
+
 ## Buka langsung
 
 - **Preview cepat:** https://raw.githack.com/ryanfuntoys/dance-girl/main/index.html
@@ -11,4 +13,4 @@ Halaman looping ala [nyan.cat](https://nyan.cat).
 
 Repo: https://github.com/ryanfuntoys/dance-girl
 
-Untuk Pages: Settings → Pages → Source **GitHub Actions**, atau **Deploy from a branch** → `main` / `/ (root)`.
+Hard refresh (iOS: hold reload) kalau cache htmlpreview masih menampilkan ikon `?`.
