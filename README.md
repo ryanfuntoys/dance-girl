@@ -2,7 +2,7 @@
 
 Halaman looping ala [nyan.cat](https://nyan.cat).
 
-Karakter, pelangi, dan bintang full-bleed. Tidak ada kotak kosong — gambar tertanam di `index.html` (tidak fetch file terpisah), jadi htmlpreview pun tetap muncul.
+Karakter memakai GIF transparan (tanpa kotak hitam). GIF tertanam di `index.html`, jadi htmlpreview tidak perlu fetch file terpisah.
 
 ## Buka langsung
 
@@ -11,6 +11,4 @@ Karakter, pelangi, dan bintang full-bleed. Tidak ada kotak kosong — gambar ter
 - **HTML preview:** https://htmlpreview.github.io/?https://github.com/ryanfuntoys/dance-girl/blob/main/index.html
 - **GitHub Pages:** https://ryanfuntoys.github.io/dance-girl/
 
-Repo: https://github.com/ryanfuntoys/dance-girl
-
-Hard refresh (iOS: hold reload) kalau cache htmlpreview masih menampilkan ikon `?`.
+Kalau masih kelihatan ikon `?`, hard refresh (iOS: tahan tombol reload) karena cache htmlpreview.
