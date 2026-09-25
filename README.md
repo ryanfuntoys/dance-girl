@@ -2,10 +2,13 @@
 
 Halaman looping ala [nyan.cat](https://nyan.cat).
 
-## URL
+## Buka langsung
 
-- Repo: https://github.com/ryanfuntoys/dance-girl
-- Preview langsung: https://htmlpreview.github.io/?https://github.com/ryanfuntoys/dance-girl/blob/main/index.html
-- GitHub Pages (setelah diaktifkan): https://ryanfuntoys.github.io/dance-girl/
+- **Preview cepat:** https://raw.githack.com/ryanfuntoys/dance-girl/main/index.html
+- **jsDelivr:** https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/index.html
+- **HTML preview:** https://htmlpreview.github.io/?https://github.com/ryanfuntoys/dance-girl/blob/main/index.html
+- **GitHub Pages:** https://ryanfuntoys.github.io/dance-girl/
 
-Buka Settings → Pages → Source **Deploy from a branch** → Branch **main** / **root**, lalu Save.
+Repo: https://github.com/ryanfuntoys/dance-girl
+
+Untuk Pages: Settings → Pages → Source **GitHub Actions**, atau **Deploy from a branch** → `main` / `/ (root)`.
