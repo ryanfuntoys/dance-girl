@@ -63,16 +63,26 @@ const girl=document.getElementById("girl");
 const flyer=document.getElementById("flyer");
 const FALLBACKS=[
   "img/loop.gif",
-  "img/loop-mini.gif",
   "https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/img/loop.gif",
-  "https://raw.githubusercontent.com/ryanfuntoys/dance-girl/main/img/loop.gif",
-  "https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/img/loop-mini.gif",
-  "https://rawcdn.githack.com/ryanfuntoys/dance-girl/main/img/loop.gif"
+  "https://raw.githubusercontent.com/ryanfuntoys/dance-girl/main/img/loop.gif"
 ];
 let fb=0;
 function nextSrc(){if(fb<FALLBACKS.length)girl.src=FALLBACKS[fb++]}
 girl.addEventListener("error",nextSrc);
-nextSrc();
+(async()=>{
+  const urls=[
+    "img/dance.b64",
+    "https://cdn.jsdelivr.net/gh/ryanfuntoys/dance-girl@main/img/dance.b64",
+    "https://raw.githubusercontent.com/ryanfuntoys/dance-girl/main/img/dance.b64"
+  ];
+  for(const u of urls){
+    try{
+      const t=(await (await fetch(u,{cache:"no-store"})).text()).trim();
+      if(t.length>80&&t[0]!=="<"){girl.src="data:image/webp;base64,"+t;return;}
+    }catch(e){}
+  }
+  nextSrc();
+})();
 const secondsEl=document.getElementById("seconds");
 const bestEl=document.getElementById("best");
 const achieveEl=document.getElementById("achieve");
